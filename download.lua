@@ -3,4 +3,5 @@ shell.run("wget http://raw.githubusercontent.com/tntdog99/QLC_minecraft/main/cds
 shell.run("wget http://raw.githubusercontent.com/tntdog99/QLC_minecraft/main/cdsr_base.lua")
 shell.run("wget http://raw.githubusercontent.com/tntdog99/QLC_minecraft/main/cdsd.lua")
 shell.run("wget http://raw.githubusercontent.com/tntdog99/QLC_minecraft/main/updater.lua")
+sleep(5)
 os.reboot()
