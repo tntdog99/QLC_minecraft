@@ -8,7 +8,6 @@ local function overworld()
         _, msg = rednet.receive("drsb")
         local filewrite = fs.open("cdsdtemp2", "w")
         filewrite.write(msg)
-        filewrite.close()
         end
     end
 end
