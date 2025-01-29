@@ -45,7 +45,7 @@ print("runing")
 end
 local function other()
     while true do
-    this, that = rednet.receive("twoitem_network", 5)
+    this, that = rednet.receive("cdsr_item_network", 5)
     table = {id = this, msg = that}
     sleep(0.05)
     print(this)
@@ -62,7 +62,7 @@ local function other()
                 local fileSNWrite = fs.open("temp2", "w")
                 fileSNWrite.write("")
                 print(that3)
-                rednet.send(this, that3, "twoitem_network")
+                rednet.send(this, that3, "cdsr_item_network")
                 break
                 end
             end
