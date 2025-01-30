@@ -36,7 +36,7 @@ print("runing")
         
                     rednet.send(SNID, msg, "item_network")
                     _, that2 = rednet.receive("item_network")
-                    fileSNWrite = fs.open("cdsrbase2", "w")
+                    local fileSNWrite = fs.open("cdsrbase2", "w")
                     fileSNWrite.write(textutils.serialise(that2))
                 end
             end
