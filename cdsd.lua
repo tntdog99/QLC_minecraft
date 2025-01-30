@@ -1,13 +1,15 @@
 rednet.open("top")
-local filein = fs.openfs.open("cdsdtemp2", "w") overworld()
-while true do
-sleep(0.05)
-    if fs.exists("cdsdtemp1") then
-    rednet.send(19, "_", "drs")
-    fs.delete("cdsdtemp1")
-    _, msg = rednet.receive("drsb")
-    local filewrite = fs.open("cdsdtemp2", "w")
-    filewrite.write(msg)
+local filein = fs.open("cdsdtemp2", "w")
+local function overworld()
+    while true do
+    sleep(0.05)
+        if fs.exists("cdsdtemp1") then
+        rednet.send(19, "_", "drs")
+        fs.delete("cdsdtemp1")
+        _, msg = rednet.receive("drsb")
+        local filewrite = fs.open("cdsdtemp2", "w")
+        filewrite.write(msg)
+        end
     end
 end
 local function other()
