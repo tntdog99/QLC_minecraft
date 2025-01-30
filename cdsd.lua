@@ -1,5 +1,5 @@
 rednet.open("top")
-local function overworld()
+local filein = fs.openfs.open("cdsdtemp2", "w") overworld()
     while true do
     sleep(0.05)
         if fs.exists("cdsdtemp1") then
