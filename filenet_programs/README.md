@@ -1,4 +1,4 @@
 # QLC_minecraft
 
 
-wget run https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/download.lua
+wget run https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenet_programs/download.lua
