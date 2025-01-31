@@ -20,10 +20,10 @@ end
 
 function receive(protocol)
 	if protocol then
-		local filerec = fs.open("/filenet/temp."..protocol, "r")
 		while true do
 			sleep(0.05)
-			if fs.exists("/filenet/temp."..protocol)
+			if fs.exists("/filenet/temp."..protocol) then
+				local filerec = fs.open("/filenet/temp."..protocol, "r")
 				if fs.getSize("/filenet/temp."..protocol) == 0 then
 				else
 					local text2 = filerec.readAll()
