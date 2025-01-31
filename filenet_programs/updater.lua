@@ -1,7 +1,8 @@
 local var = 3600
 repeat 
   var = var - 1
-  term.write(var.." until reboot")
+  term.write(var.." seconds until reboot")
+  term.setCursorPos(1,1)
 sleep(1)
 until var == 0
 shell.run("rm", "*")
