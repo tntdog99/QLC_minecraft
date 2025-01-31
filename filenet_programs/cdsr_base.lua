@@ -35,7 +35,6 @@ local function other()
             sleep(0.05)
             local that3 = filenet.receive("cdsrbase2")
             rednet.send(this, that3, "twoitem_network")
-            break
         end
     end
 end
