@@ -3,10 +3,10 @@ rednet.open("top")
 local SNID = 4
 local table = {}
 local function overworld()
-print("runing")
+    print("runing")
     while true do
-    sleep(0.05)
-    local this3 = filenet.receive("cdsrfort1")
+        sleep(0.05)
+        local this3 = filenet.receive("cdsrfort1")
             id = this3.id
             msg = this3.msg
             print(msg.type)
