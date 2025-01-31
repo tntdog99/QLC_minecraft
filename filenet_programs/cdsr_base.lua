@@ -1,6 +1,6 @@
 local filenet = require("filenet")
 rednet.open("top")
-local SNID = 4
+local SNID = 30
 local table = {}
 local function overworld()
 print("runing")
