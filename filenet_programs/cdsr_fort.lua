@@ -1,11 +1,4 @@
 rednet.open("top")
-fs.delete("cdsrfort2")
-fs.delete("cdsrfort1")
-
-local fileWrite = fs.open("cdsrfort1", "w")
-local fileRead = fs.open("cdsrfort1", "r")
-local fileSNRead = fs.open("cdsrfort2", "r")
-local fileSNWrite = fs.open("cdsrfort2", "w")
 local SNID = 4
 local table = {}
 fileWrite.write("")
@@ -15,29 +8,20 @@ local function overworld()
 print("runing")
     while true do
     sleep(0.05)
-        if fs.getSize("cdsrfort1") == 0 then
-        else
-        print("reading file")
-            fileRead = fs.open("cdsrfort1", "r")
-            local this3 = textutils.unserialise(fileRead.readAll())
-            fileWrite = fs.open("cdsrfort1", "w")
+    local this3 = filenet.receive("cdsrfort1")
             id = this3.id
             msg = this3.msg
             print(msg.type)
-            fileWrite.write("")
             if this3 then
                 if msg.type == "list" then
                      rednet.send(SNID, { type = "list" }, "item_network")
                     _, that2 = rednet.receive("item_network", 5)
-                    that2ser = textutils.serialise(that2)
-                    local fileSNWrite = fs.open("cdsrfort2", "w")
-                    fileSNWrite.write(that2ser)
+                    filenet.send(that2,"cdsrfort2")
                 elseif msg.type == "request" then 
         
                     rednet.send(SNID, msg, "item_network")
                     _, that2 = rednet.receive("item_network")
-                    local fileSNWrite = fs.open("cdsrfort2", "w")
-                    fileSNWrite.write(textutils.serialise(that2))
+                    filenet.send(that2,"cdsrfort1")
                 end
             end
         end
@@ -45,27 +29,16 @@ print("runing")
 end
 local function other()
     while true do
-    this, that = rednet.receive("cdsr_item_network", 5)
-    table = {id = this, msg = that}
-    sleep(0.05)
-    print(this)
+        this, that = rednet.receive("cdsr_item_network", 5)
+        table = {id = this, msg = that}
+        sleep(0.05)
         if this then
-        print("msg got")
-        fileWrite.write(textutils.serialise(table))
-            while true do
+            print("msg got")
+            filenet.send(table, "cdsrfort1")
             sleep(0.05)
-                if fs.getSize("cdsrfort2") == 0 then
-                else
-                print("reading file")
-                local fileSNRead = fs.open("cdsrfort2", "r")
-                local that3 = textutils.unserialise(fileSNRead.readAll())
-                local fileSNWrite = fs.open("cdsrfort2", "w")
-                fileSNWrite.write("")
-                print(that3)
-                rednet.send(this, that3, "cdsr_item_network")
-                break
-                end
-            end
+            local that3 = filenet.receive("cdsrfort2")
+            rednet.send(this, that3, "cdsr_item_network")
+            break
         end
     end
 end
