@@ -1,6 +1,6 @@
 function filenet.send(text, protocol)
 	if text and protocol then
-		local (file..protocol) = fs.open("filenet/temp."..protocol, "w")
+		local "file..protocol" = fs.open("filenet/temp."..protocol, "w")
 
 
 	elseif text then
