@@ -1,4 +1,10 @@
-sleep(3600)
+local var = 3600
+repeat 
+  local var = var - 1
+  term.write(var.." until reboot")
+  term.setCurserPos(1,1)
+sleep(1)
+until var == 0
 shell.run("rm", "*")
 shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenet_programs/startup.lua")
 shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenet_programs/cdsr_fort.lua")
