@@ -1,8 +1,7 @@
+local filenet = require("filenet")
 rednet.open("top")
 local SNID = 4
 local table = {}
-fileWrite.write("")
-fileSNWrite.write("")
 --rednet.receive("id", "message")
 local function overworld()
 print("runing")
@@ -26,7 +25,6 @@ print("runing")
             end
         end
     end
-end
 local function other()
     while true do
         this, that = rednet.receive("cdsr_item_network", 5)
