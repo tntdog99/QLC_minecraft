@@ -2,7 +2,6 @@ local filenet = require("filenet")
 rednet.open("top")
 local SNID = 4
 local table = {}
---rednet.receive("id", "message")
 local function overworld()
 print("runing")
     while true do
