@@ -23,18 +23,20 @@ function receive(protocol)
 		local filerec = fs.open("/filenet/temp."..protocol, "r")
 		while true do
 			sleep(0.05)
-				if pcall(fs.getSize("/filenet/temp."..protocol)) == 0 then
+			if fs.exists("/filenet/temp."..protocol)
+				if fs.getSize("/filenet/temp."..protocol) == 0 then
 				else
 					local text2 = filerec.readAll()
 					if textutils.unserialize(text2) then
 						fs.delete("/filenet/temp."..protocol)
-					return textutils.unserialize(text2)
+						return textutils.unserialize(text2)
 					else
 						fs.delete("/filenet/temp."..protocol)
-					return text2		
+						return text2		
 					end
 				end
-			end	
+			end
+		end	
 	else
 		error("No protocol")
 	end
