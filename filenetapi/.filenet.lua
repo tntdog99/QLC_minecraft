@@ -1,6 +1,6 @@
 function send(text, protocol)
 	if text and protocol then
-		local file = fs.open("/filenet/temp."..protocol, "w")
+		local file = fs.open("./filenet/temp."..protocol, "w")
 			if textutils.serialize(text) then
 				file.write(textutils.serialize(text))
 				file.close()
@@ -32,15 +32,15 @@ function receive(protocol, timeout)
 				return nil
 			end
 			if fs.exists("/filenet/temp."..protocol) then
-				local filerec = fs.open("/filenet/temp."..protocol, "r")
-				if fs.getSize("/filenet/temp."..protocol) == 0 then
+				local filerec = fs.open("./filenet/temp."..protocol, "r")
+				if fs.getSize("./filenet/temp."..protocol) == 0 then
 				else
 					local text2 = filerec.readAll()
 					if textutils.unserialize(text2) then
-						fs.delete("/filenet/temp."..protocol)
+						fs.delete("./filenet/temp."..protocol)
 						return textutils.unserialize(text2)
 					else
-						fs.delete("/filenet/temp."..protocol)
+						fs.delete("./filenet/temp."..protocol)
 						return text2		
 					end
 				end
