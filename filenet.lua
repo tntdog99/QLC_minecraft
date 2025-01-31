@@ -1,4 +1,4 @@
-function filenet.send(text, protocol)
+local function filenet.send(text, protocol)
 	if text and protocol then
 		local file = fs.open("/filenet/temp."..protocol, "w")
 			if textutils.serialize(text) then
@@ -18,7 +18,7 @@ end
 
 
 
-function filenet.receive(protocol)
+local function filenet.receive(protocol)
 	if protocol then
 		local filerec = fs.open("/filenet/temp."..protocol, "w")
 		local filerec = fs.open("/filenet/temp."..protocol, "r")
