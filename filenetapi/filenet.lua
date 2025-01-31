@@ -19,18 +19,15 @@ end
 
 
 function receive(protocol, timeout)
-	if timeout = nil then
-		local timeout = 60
-	end
 	if protocol then
 		local timer_id = os.startTimer(timeout)
 		local event, id
 		while true do
+			sleep(0.05)
 			event, id = os.pullEvent("timer")
 			if id == timer_id then
 				return nil
 			end
-			sleep(0.05)
 			if fs.exists("/filenet/temp."..protocol) then
 				local filerec = fs.open("/filenet/temp."..protocol, "r")
 				if fs.getSize("/filenet/temp."..protocol) == 0 then
