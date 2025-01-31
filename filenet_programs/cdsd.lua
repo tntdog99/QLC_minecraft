@@ -1,7 +1,5 @@
 local filenet = require("filenet")
 rednet.open("top")
-local filein = fs.open("cdsd2", "w")
-local filein = fs.open("cdsd1", "w")
 local function overworld()
     while true do
     sleep(0.05)
