@@ -20,7 +20,6 @@ end
 
 function receive(protocol)
 	if protocol then
-		local filerec = fs.open("/filenet/temp."..protocol, "w")
 		local filerec = fs.open("/filenet/temp."..protocol, "r")
 		while true do
 			sleep(0.05)
@@ -40,3 +39,6 @@ function receive(protocol)
 	error("No protocol")
 	end
 end
+
+
+return { receive = receive, send = send}
