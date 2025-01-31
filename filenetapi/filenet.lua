@@ -20,6 +20,11 @@ end
 
 function receive(protocol, timeout)
 	if protocol then
+		repeat
+		if timeout == nil
+	 	local timeout = 60
+		else
+		until not timeout == nil 
 		local timer_id = os.startTimer(timeout)
 		local event, id
 		while true do
