@@ -20,7 +20,7 @@ end
 
 function receive(protocol, timeout)
 	if protocol then
-		if timeout == nil
+		if timeout == nil then
 	 		timeout = 60
 		end
 		local timer_id = os.startTimer(timeout)
