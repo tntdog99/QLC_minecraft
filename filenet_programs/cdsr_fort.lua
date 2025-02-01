@@ -1,4 +1,4 @@
-local filenet = require("filenet")
+local filenet = require(".filenet")
 rednet.open("top")
 local SNID = 4
 local table = {}
