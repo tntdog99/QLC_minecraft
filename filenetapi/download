@@ -1,0 +1,2 @@
+shell.run("wget https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenetapi/filenet.lua")
+shell.run("wget run https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenetapi/.startup.autocomplete")
