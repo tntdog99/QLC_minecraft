@@ -1,1 +1,1 @@
-_G.filenet = reqire("filenet")
+_G.filenet = require("filenet")
