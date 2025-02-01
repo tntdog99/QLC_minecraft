@@ -20,16 +20,17 @@ end
 
 function receive(protocol, timeout)
 	if protocol then
-		if timeout == nil then
-	 		timeout = 60
+		if timeout then
+			local timer_id = os.startTimer(timeout)
+			local event, id
 		end
-		local timer_id = os.startTimer(timeout)
-		local event, id
 		while true do
 			sleep(0.05)
-			event, id = os.pullEvent("timer")
-			if id == timer_id then
-				return nil
+			if timer_id then
+				event, id = os.pullEvent("timer")
+				if id == timer_id then
+					return nil
+				end
 			end
 			if fs.exists("/filenet/temp."..protocol) then
 				local filerec = fs.open("./filenet/temp."..protocol, "r")
