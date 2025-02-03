@@ -22,8 +22,24 @@ function custom_encrypt(text, key)
     return table.concat(result)
 end
 
+
+function xorEncrypt(data, key)
+    local result = {}
+    for i = 1, #data do
+        local byte = string.byte(data, i)
+        local keyByte = string.byte(key, (i - 1) % #key + 1)
+        result[i] = string.char(bit.bxor(byte, keyByte))
+    end
+    return table.concat(result)
+end
+
+function xorDecrypt(data, key)
+    return xorEncrypt(data, key) -- XOR encryption is symmetric
+end
+
 -- Example usage
 local text = "HelloWorld"
 local key = "Key"
 local encrypted = custom_encrypt(text, key)
-print("Custom Encrypted:", encrypted)
+local encrypted2 = xorEncrypt(encrypted, key)
+print("Custom Encrypted:", encrypted2)
