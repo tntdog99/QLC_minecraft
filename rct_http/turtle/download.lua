@@ -1,0 +1,5 @@
+shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/rct_http/turtle/checker.lua")
+shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/rct_http/turtle/rct_v1.lua")
+shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/rct_http/turtle/startup.lua")
+shell.run("wget http://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/rct_http/turtle/updater.lua")
+os.reboot()
