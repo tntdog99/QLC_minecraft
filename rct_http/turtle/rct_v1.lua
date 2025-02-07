@@ -10,7 +10,7 @@ function listenhttp()
         local this2 = this.readAll()
         if this2 then
             local func = load(this2)
-                _, res1, res2 = pcall(func)
+                _, res1, res2, res3 = pcall(func)
                 if res1 ~= nil then
                     if textutils.serialise(res1) then
                         new1 = textutils.serialise(res1)
@@ -21,6 +21,11 @@ function listenhttp()
                         new2 = textutils.serialise(res2)
                     else
                     new2 = res2
+                    end
+                    if textutils.serialise(res3) then
+                        new3 = textutils.serialise(res3)
+                    else
+                    new3 = res3
                     end
                 print(new)
                 end
@@ -45,6 +50,7 @@ function sendInventoryUpdate()
     lines[selectedSlot] = ">".. lines[selectedSlot]
     table.insert(lines, new1)
     table.insert(lines, new2)
+    table.insert(lines, new3)
     invsend(lines)
 end
 -- Function to handle inventory change events

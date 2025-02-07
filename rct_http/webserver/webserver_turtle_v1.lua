@@ -94,6 +94,7 @@ routes = {
     <button onclick="sendCommand('if turtle.getSelectedSlot() == 16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot() + 1 ) end')">Next</button>
     <button onclick="sendCommand('return turtle.equipRight()')">Equip right</button>
     <button onclick="sendCommand('return turtle.equipLeft()')">Equip left</button>
+    <button onclick="sendCommand('return gps.locate()')">GPS</button>
   </div>
   <div style="margin-top:10px;">
     <input type="text" id="customCommand" placeholder="Enter custom command" onkeydown="handleCustomCommandKey(event)" style="width:300px;">
