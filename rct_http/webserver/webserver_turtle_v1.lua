@@ -1,6 +1,6 @@
 port = 8080
 local vars = {
-  1, "Value 2", "Value 3", "Value 4", "Value 5", "Value 6",
+  "hello ryan", "use the pickaxe", "you did not have one before", "Value 4", "Value 5", "Value 6",
   "Value 7", "Value 8", "Value 9", "Value 10", "Value 11", "Value 12",
   "Value 13", "Value 14", "Value 15", "Value 16", "Value 17", "test"
 }
@@ -99,9 +99,7 @@ routes = {
     <input type="text" id="customCommand" placeholder="Enter custom command" onkeydown="handleCustomCommandKey(event)" style="width:300px;">
     <button onclick="sendCommand(document.getElementById('customCommand').value); document.getElementById('customCommand').value = '';">Send Custom Command</button>
   </div>
-  <h2>Turtle inventory</h2>
   <table>
-    <tr><th>#</th><th>Value</th></tr>
     <tbody id="varContent"></tbody>
   </table>
 </body>

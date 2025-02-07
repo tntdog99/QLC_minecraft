@@ -1,19 +1,33 @@
 function invtime()
-while true do
-sleep(0.1)
-sendInventoryUpdate()
-end
+    while true do
+        sleep(0.1)
+        sendInventoryUpdate()
+    end
 end
 function listenhttp()
     while true do
-        this = http.get("http://192.168.1.79:8080/getcmd")
-        this2 = this.readAll()
+        local this = http.get("http://192.168.1.79:8080/getcmd")
+        local this2 = "return "..this.readAll()
         if this2 then
             local func = load(this2)
-            pcall(func)
-        end
+                _, res1, res2 = pcall(func)
+                if res1 ~= nil then
+                    if textutils.serialise(res1) then
+                        new1 = textutils.serialise(res1)
+                    else
+                    new1 = res1
+                    end
+                    if textutils.serialise(res2) then
+                        new2 = textutils.serialise(res2)
+                    else
+                    new2 = res2
+                    end
+                print(new)
+                end
+                end
     end
 end
+
 function sendInventoryUpdate()
     local lines = {} -- Store each item's details as a line
     local selectedSlot = turtle.getSelectedSlot() -- Get the currently selected slot
@@ -29,6 +43,8 @@ function sendInventoryUpdate()
     end
     table.insert(lines, "Fuel level "..Fuellevel)
     lines[selectedSlot] = ">".. lines[selectedSlot]
+    table.insert(lines, new1)
+    table.insert(lines, new2)
     invsend(lines)
 end
 -- Function to handle inventory change events
