@@ -1,6 +1,3 @@
-local this =
-local this2 =
-
 function invtime()
 while true do
 sleep(1)
@@ -61,4 +58,11 @@ function invsend(data2)
         print("HTTP request failed")
     end
 end
-parallel.waitForAll(inventoryWatcher, listenhttp, invtime)
+if http.checkURL("http://192.168.1.79:8080/working?") then
+    parallel.waitForAll(inventoryWatcher, listenhttp, invtime)
+else
+    _, err = http.checkURL("http://192.168.1.79:8080/working?")
+    if err == "Domain not permitted" then
+        print("private IPs not allowed change cc server settings")
+    end
+end
