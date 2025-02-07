@@ -90,8 +90,8 @@ routes = {
     <button onclick="sendCommand('turtle.dig()')">Dig</button>
     <button onclick="sendCommand('turtle.digDown()')">Dig down</button>
     <button onclick="sendCommand('turtle.digUp()')">Dig up</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot()==16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot()-1) end')">Last</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot()==1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot()+1) end')">Next</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot() == 1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot()-1) end')">Last</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot() == 16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot()+1) end')">Next</button>
     <button onclick="sendCommand('turtle.equipRight()')">Equip right</button>
     <button onclick="sendCommand('turtle.equipLeft()')">Equip left</button>
   </div>

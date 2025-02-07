@@ -1,2 +1,3 @@
 while true do
-if 
+pcall(shell.run, "rct_v1.lua")
+end
