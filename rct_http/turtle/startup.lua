@@ -1,3 +1,3 @@
-id = multishell.launch({}, "rct_v.1.lua")
+id = multishell.launch({}, "rct_v1.lua")
 shell.run("checker")
 shell.run("bg updater")
