@@ -58,12 +58,12 @@ routes = {
       }
 
       switch(e.key.toLowerCase()) {
-        case 'w': sendCommand('turtle.forward()'); break;
-        case 's': sendCommand('turtle.back()'); break;
-        case 'a': sendCommand('turtle.turnLeft()'); break;
-        case 'd': sendCommand('turtle.turnRight()'); break;
-        case 'e': sendCommand('turtle.up()'); break;
-        case 'q': sendCommand('turtle.down()'); break;
+        case 'w': sendCommand('return turtle.forward()'); break;
+        case 's': sendCommand('return turtle.back()'); break;
+        case 'a': sendCommand('return turtle.turnLeft()'); break;
+        case 'd': sendCommand('return turtle.turnRight()'); break;
+        case 'e': sendCommand('return turtle.up()'); break;
+        case 'q': sendCommand('return turtle.down()'); break;
       }
     });
 
@@ -78,22 +78,22 @@ routes = {
 </head>
 <body>
   <div>
-    <button onclick="sendCommand('turtle.forward()')">Forward</button>
-    <button onclick="sendCommand('turtle.back()')">Back</button>
-    <button onclick="sendCommand('turtle.turnLeft()')">Left</button>
-    <button onclick="sendCommand('turtle.turnRight()')">Right</button>
-    <button onclick="sendCommand('turtle.up()')">Up</button>
-    <button onclick="sendCommand('turtle.down()')">Down</button>
-    <button onclick="sendCommand('turtle.place()')">Place</button>
-    <button onclick="sendCommand('turtle.placeDown()')">Place down</button>
-    <button onclick="sendCommand('turtle.placeUp()')">Place up</button>
-    <button onclick="sendCommand('turtle.dig()')">Dig</button>
-    <button onclick="sendCommand('turtle.digDown()')">Dig down</button>
-    <button onclick="sendCommand('turtle.digUp()')">Dig up</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot() == 1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot()-1) end')">Last</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot() == 16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot()+1) end')">Next</button>
-    <button onclick="sendCommand('turtle.equipRight()')">Equip right</button>
-    <button onclick="sendCommand('turtle.equipLeft()')">Equip left</button>
+    <button onclick="sendCommand('return turtle.forward()')">Forward</button>
+    <button onclick="sendCommand('return turtle.back()')">Back</button>
+    <button onclick="sendCommand('return turtle.turnLeft()')">Left</button>
+    <button onclick="sendCommand('return turtle.turnRight()')">Right</button>
+    <button onclick="sendCommand('return turtle.up()')">Up</button>
+    <button onclick="sendCommand('return turtle.down()')">Down</button>
+    <button onclick="sendCommand('return turtle.place()')">Place</button>
+    <button onclick="sendCommand('return turtle.placeDown()')">Place down</button>
+    <button onclick="sendCommand('return turtle.placeUp()')">Place up</button>
+    <button onclick="sendCommand('return turtle.dig()')">Dig</button>
+    <button onclick="sendCommand('return turtle.digDown()')">Dig down</button>
+    <button onclick="sendCommand('return turtle.digUp()')">Dig up</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot() == 1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot() - 1 ) end')">Last</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot() == 16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot() + 1 ) end')">Next</button>
+    <button onclick="sendCommand('return turtle.equipRight()')">Equip right</button>
+    <button onclick="sendCommand('return turtle.equipLeft()')">Equip left</button>
   </div>
   <div style="margin-top:10px;">
     <input type="text" id="customCommand" placeholder="Enter custom command" onkeydown="handleCustomCommandKey(event)" style="width:300px;">

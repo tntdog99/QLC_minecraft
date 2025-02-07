@@ -7,7 +7,7 @@ end
 function listenhttp()
     while true do
         local this = http.get("http://192.168.1.79:8080/getcmd")
-        local this2 = "return "..this.readAll()
+        local this2 = this.readAll()
         if this2 then
             local func = load(this2)
                 _, res1, res2 = pcall(func)
