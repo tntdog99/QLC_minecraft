@@ -1,3 +1,6 @@
+local this =
+local this2 =
+
 function invtime()
 while true do
 sleep(1)
