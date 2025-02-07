@@ -1,6 +1,6 @@
 function invtime()
 while true do
-sleep(1)
+sleep(0.1)
 sendInventoryUpdate()
 end
 end
@@ -10,7 +10,7 @@ function listenhttp()
         this2 = this.readAll()
         if this2 then
             local func = load(this2)
-                func()
+            pcall(func)
         end
     end
 end

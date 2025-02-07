@@ -23,16 +23,22 @@ routes = {
   <style>
     body { font:14px Arial; text-align:center; margin:0; padding:10px; }
     button { margin:3px; padding:5px 8px; font-size:14px; }
+    input { margin:3px; padding:5px; font-size:14px; }
     table { margin:auto; border-collapse:collapse; font-size:12px; }
     th, td { border:1px solid #ddd; padding:4px 6px; }
   </style>
-  <script>
+<script>
     // Send a command to the server
     function sendCommand(cmd) {
-      fetch('/cmd', { method:'POST', body: JSON.stringify({ command: cmd }) })
-        .then(r => r.text()).catch(e => console.error(e));
+      if (!cmd) return;
+      fetch('/cmd', {
+        method: 'POST',
+        body: JSON.stringify({ command: cmd })
+      })
+      .then(r => r.text())
+      .catch(e => console.error(e));
     }
-    
+
     // Update the variables table by fetching /vars
     function updateVars() {
       fetch('/vars')
@@ -43,9 +49,14 @@ routes = {
     // Update every 200ms
     setInterval(updateVars, 200);
     window.onload = updateVars;
-    
+
     // Key bindings for control commands
     document.addEventListener('keydown', function(e) {
+      // Prevent keybinds if an input or textarea is focused
+      if (document.activeElement.tagName === "INPUT" || document.activeElement.tagName === "TEXTAREA") {
+        return;
+      }
+
       switch(e.key.toLowerCase()) {
         case 'w': sendCommand('turtle.forward()'); break;
         case 's': sendCommand('turtle.back()'); break;
@@ -53,10 +64,17 @@ routes = {
         case 'd': sendCommand('turtle.turnRight()'); break;
         case 'e': sendCommand('turtle.up()'); break;
         case 'q': sendCommand('turtle.down()'); break;
-        // Add more key bindings as needed.
       }
     });
-  </script>
+
+    // Handle Enter key on the custom command input
+    function handleCustomCommandKey(e) {
+      if (e.key === "Enter") {
+        sendCommand(document.getElementById('customCommand').value);
+        document.getElementById('customCommand').value = "";
+      }
+    }
+</script>
 </head>
 <body>
   <div>
@@ -72,12 +90,16 @@ routes = {
     <button onclick="sendCommand('turtle.dig()')">Dig</button>
     <button onclick="sendCommand('turtle.digDown()')">Dig down</button>
     <button onclick="sendCommand('turtle.digUp()')">Dig up</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot()==16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot()+1) end')">Next</button>
-    <button onclick="sendCommand('if turtle.getSelectedSlot()==1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot()-1) end')">Last</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot()==16 then turtle.select(1) else turtle.select(turtle.getSelectedSlot()-1) end')">Last</button>
+    <button onclick="sendCommand('if turtle.getSelectedSlot()==1 then turtle.select(16) else turtle.select(turtle.getSelectedSlot()+1) end')">Next</button>
     <button onclick="sendCommand('turtle.equipRight()')">Equip right</button>
     <button onclick="sendCommand('turtle.equipLeft()')">Equip left</button>
   </div>
-  <h2>Server Variables</h2>
+  <div style="margin-top:10px;">
+    <input type="text" id="customCommand" placeholder="Enter custom command" onkeydown="handleCustomCommandKey(event)" style="width:300px;">
+    <button onclick="sendCommand(document.getElementById('customCommand').value); document.getElementById('customCommand').value = '';">Send Custom Command</button>
+  </div>
+  <h2>Turtle inventory</h2>
   <table>
     <tr><th>#</th><th>Value</th></tr>
     <tbody id="varContent"></tbody>
@@ -150,4 +172,5 @@ function listenhttp()
     end
   end
 end
+
 parallel.waitForAll(webserver, listenhttp)
