@@ -1,3 +1,3 @@
 # filenet a simple api for cc tweaked
 
-wget run https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenetapi/download
+wget run https://raw.githubusercontent.com/TNTDOG99/QLC_minecraft/main/filenetapi/download.lua
