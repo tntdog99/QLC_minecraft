@@ -1,10 +1,15 @@
 port = 8080
+term.clear()
+term.setCursorPos(1, 1)
+print("webserver running on port:" .. port)
+
 local vars = {
-  "hello ryan", "use the pickaxe", "you did not have one before", "Value 4", "Value 5", "Value 6",
-  "Value 7", "Value 8", "Value 9", "Value 10", "Value 11", "Value 12",
-  "Value 13", "Value 14", "Value 15", "Value 16", "Value 17", "test"
+  "invdata", "invdata", "invdata", "invdata", "invdata", "invdata",
+  "invdata", "invdata", "invdata", "invdata", "invdata", "invdata",
+  "invdata", "invdata", "invdata", "invdata", "fueldata"
 }
 local lastCommand = nil
+local displayText = ""  -- Global variable for display text
 
 local function send(res, text, contentType)
   res.setStatusCode(200)
@@ -26,6 +31,7 @@ routes = {
     input { margin:3px; padding:5px; font-size:14px; }
     table { margin:auto; border-collapse:collapse; font-size:12px; }
     th, td { border:1px solid #ddd; padding:4px 6px; }
+    #displayArea { border:1px solid #ccc; padding:10px; margin:10px; }
   </style>
 <script>
     // Send a command to the server
@@ -46,9 +52,22 @@ routes = {
         .then(html => { document.getElementById('varContent').innerHTML = html; })
         .catch(e => console.error(e));
     }
+    // Update display area by fetching /display
+    function updateDisplay() {
+      fetch('/display')
+        .then(response => response.text())
+        .then(text => { document.getElementById('displayArea').innerText = text; })
+        .catch(e => console.error(e));
+    }
     // Update every 200ms
-    setInterval(updateVars, 200);
-    window.onload = updateVars;
+    setInterval(function() {
+      updateVars();
+      updateDisplay();
+    }, 200);
+    window.onload = function() {
+      updateVars();
+      updateDisplay();
+    };
 
     // Key bindings for control commands
     document.addEventListener('keydown', function(e) {
@@ -100,6 +119,7 @@ routes = {
     <input type="text" id="customCommand" placeholder="Enter custom command" onkeydown="handleCustomCommandKey(event)" style="width:300px;">
     <button onclick="sendCommand(document.getElementById('customCommand').value); document.getElementById('customCommand').value = '';">Send Custom Command</button>
   </div>
+  <div id="displayArea">Display text will appear here</div>
   <table>
     <tbody id="varContent"></tbody>
   </table>
@@ -144,9 +164,12 @@ routes = {
 
   ["/filter"] = function(req, res)
     local info = req.readAll()
-    --print(textutils.serialize(info))
     vars = textutils.unserialize(info)
     send(res, info, "text/plain")
+  end,
+
+  ["/display"] = function(req, res)
+    send(res, displayText, "text/plain")
   end
 }
 
@@ -161,6 +184,13 @@ function webserver()
   http.listen(port, handleRequest)
 end
 
+-- Determine terminal size and create separate windows.
+local termSizeX, termSizeY = term.getSize()
+-- Output window (for HTTP listener output)
+local outputWin = window.create(term.current(), 1, 4, termSizeX, termSizeY - 3)
+outputWin.clear()
+outputWin.setCursorPos(1, 1)
+
 function listenhttp()
   while true do
     local this = http.get("http://localhost:" .. port .. "/getcmd")
@@ -168,10 +198,30 @@ function listenhttp()
     if this then
       local var = this.readAll()
       if var ~= "" then
-      print(var)
+        outputWin.setCursorPos(1, 1)
+        outputWin.clearLine()
+        outputWin.write(var)
       end
     end
   end
 end
 
-parallel.waitForAll(webserver, listenhttp)
+-- Input window (for display text input)
+local inputWin = window.create(term.current(), 1, 2, termSizeX, 1)
+inputWin.clear()
+
+function listenForDisplayInput()
+  while true do
+    inputWin.setCursorPos(1, 1)
+    inputWin.clear()
+    inputWin.write("Enter display text: ")
+    -- Redirect input so that read() uses the input window
+    local originalTerm = term.current()
+    term.redirect(inputWin)
+    local input = read()
+    term.redirect(originalTerm)
+    displayText = input
+  end
+end
+
+parallel.waitForAll(webserver, listenhttp, listenForDisplayInput)
