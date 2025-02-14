@@ -144,7 +144,7 @@ routes = {
 
   ["/filter"] = function(req, res)
     local info = req.readAll()
-    print(textutils.serialize(info))
+    --print(textutils.serialize(info))
     vars = textutils.unserialize(info)
     send(res, info, "text/plain")
   end
@@ -166,8 +166,10 @@ function listenhttp()
     local this = http.get("http://localhost:" .. port .. "/getcmd")
     sleep(0.05)
     if this then
-      local this2 = this.readAll()
-      if this2 then print(this2) end
+      local var = this.readAll()
+      if var ~= "" then
+      print(var)
+      end
     end
   end
 end

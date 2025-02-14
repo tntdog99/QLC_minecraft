@@ -6,7 +6,7 @@ function invtime()
 end
 function listenhttp()
     while true do
-        local this = http.get("http://192.168.1.79:8080/getcmd")
+        local this = http.get("http://DESKTOP-KII4HCP:8080/getcmd")
         local this2 = this.readAll()
         if this2 then
             local func = load(this2)
@@ -65,7 +65,7 @@ end
 
 function invsend(data2)
 
-    local url = "http://192.168.1.79:8080/filter"
+    local url = "http:/DESKTOP-KII4HCP:8080/filter"
     local data = textutils.serialise(data2)
     local headers = {
         ["Content-Type"] = "text/plain"
@@ -80,10 +80,10 @@ function invsend(data2)
         print("HTTP request failed")
     end
 end
-if http.checkURL("http://192.168.1.79:8080/working?") then
+if http.checkURL("http://DESKTOP-KII4HCP:8080/working?") then
     parallel.waitForAll(inventoryWatcher, listenhttp, invtime)
 else
-    _, err = http.checkURL("http://192.168.1.79:8080/working?")
+    _, err = http.checkURL("http://DESKTOP-KII4HCP:8080/working?")
     if err == "Domain not permitted" then
         print("private IPs not allowed change cc server settings")
     end
