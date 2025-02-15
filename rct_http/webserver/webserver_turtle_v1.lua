@@ -24,7 +24,7 @@ routes = {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Turtle Relay</title>
+  <title>Turtle Remote Control</title>
   <style>
     body { font:14px Arial; text-align:center; margin:0; padding:10px; }
     button { margin:3px; padding:5px 8px; font-size:14px; }
