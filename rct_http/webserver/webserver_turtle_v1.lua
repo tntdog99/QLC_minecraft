@@ -190,25 +190,25 @@ local termSizeX, termSizeY = term.getSize()
 local outputWin = window.create(term.current(), 1, 4, termSizeX, termSizeY - 3)
 outputWin.clear()
 outputWin.setCursorPos(1, 1)
+-- Input window (for display text input)
+local inputWin = window.create(term.current(), 1, 2, termSizeX, 1)
+inputWin.clear()
 
 function listenhttp()
   while true do
     local this = http.get("http://localhost:" .. port .. "/getcmd")
     sleep(0.05)
     if this then
-      local var = this.readAll()
-      if var ~= "" then
+      local discommand = this.readAll()
+      if discommand ~= "" then
         outputWin.setCursorPos(1, 1)
-        outputWin.clearLine()
-        outputWin.write(var)
+        outputWin.clear()
+        outputWin.write(discommand)
       end
     end
   end
 end
 
--- Input window (for display text input)
-local inputWin = window.create(term.current(), 1, 2, termSizeX, 1)
-inputWin.clear()
 
 function listenForDisplayInput()
   while true do
