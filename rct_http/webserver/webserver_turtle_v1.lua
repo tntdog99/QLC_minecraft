@@ -63,7 +63,7 @@ routes = {
     setInterval(function() {
       updateVars();
       updateDisplay();
-    }, 200);
+    }, 100);
     window.onload = function() {
       updateVars();
       updateDisplay();
