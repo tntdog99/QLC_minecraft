@@ -1,6 +1,7 @@
 IPFILE = io.open("IP.txt", "r")
-IP = IPFILE.readAll()
-IPFILE.close()
+IP = IPFILE.read(IPFILE)
+print(IP)
+IPFILE.close(IPFILE)
 function invtime()
     while true do
         sleep(0.1)
